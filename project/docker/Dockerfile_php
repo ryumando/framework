@@ -1,0 +1,6 @@
+FROM php:8.0-apache
+RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
+RUN /bin/sh -c a2enmod rewrite
+RUN apt-get update \
+    && apt-get install -y libpq-dev ssmtp \
+    && docker-php-ext-install pdo_mysql pdo_pgsql

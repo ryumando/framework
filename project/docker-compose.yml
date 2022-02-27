@@ -1,0 +1,45 @@
+version: '3'
+services:
+  php:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile_php
+    volumes:
+      - ../:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - 8080:80
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: mysql_db
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_password
+      MYSQL_ROOT_PASSWORD: mysql_root_password
+      TZ: 'Asia/Tokyo'
+  postgres:
+    image: postgres:14.2-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres_db
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      TZ: 'Asia/Tokyo'
+  mail:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile_mail
+    ports:
+      - 1080:80
+      - 3025:25
+volumes:
+  mysql:
+  postgres:
