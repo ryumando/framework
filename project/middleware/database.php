@@ -22,17 +22,17 @@ class Database extends \Common\Core\Database
         #   ],
         #   'mysql' => [
         #       'driver' => 'mysql',
-        #       'user' => 'mysql_user',
-        #       'password' => 'mysql_password',
-        #       'dbname' => 'mysql_db',
-        #       'host' => 'mysql',
+        #       'user' => self::config('database.mysql.user'),
+        #       'password' => self::config('database.mysql.password'),
+        #       'dbname' => self::config('database.mysql.dbname'),
+        #       'host' => self::config('database.mysql.host'),
         #   ],
         #   'postgres' => [
         #       'driver' => 'postgres',
-        #       'user' => 'postgres_user',
-        #       'password' => 'postgres_password',
-        #       'dbname' => 'postgres_db',
-        #       'host' => 'postgres',
+        #       'user' => self::config('database.postgres.user'),
+        #       'password' => self::config('database.postgres.password'),
+        #       'dbname' => self::config('database.postgres.dbname'),
+        #       'host' => self::config('database.postgres.host'),
         #   ],
         ];
         parent::__construct($key);

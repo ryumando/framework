@@ -354,7 +354,7 @@ migration_history テーブルのテーブル名を変更する場合は、Datab
 
 ## メールの送信
 
-\Common\Core\Mail クラスからメールの送信を行うことが出来ます。  
+Middleware\Mail クラスからメールの送信を行うことが出来ます。  
 メソッドは以下です。
 
 - subject  
@@ -399,7 +399,7 @@ HTMLメールを送信する場合のみ true を設定します。
 
 【実行例】
 
-    $mail = new \Common\Core\Mail();
+    $mail = new \Middleware\Mail();
     
     // 必須項目のみ
     $mail
