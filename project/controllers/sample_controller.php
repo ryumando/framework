@@ -5,12 +5,10 @@ namespace Controllers;
 /**
  * サンプル コントローラークラス
  */
-class SampleController extends \Common\Core\Controller
+class SampleController extends Controller
 {
   public function index(...$args)
   {
-    var_dump($_ENV);exit;
-    
     $res = [
       'title' => 'Framework Sample',
       'body' => '< Hello! World >',

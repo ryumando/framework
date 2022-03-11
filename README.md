@@ -153,7 +153,9 @@ View ファイルの $res 変数は以下になります。
     MYSQL_DBNAME = mysql_db
     MYSQL_HOST = mysql
 
-設定した環境変数は $_ENV 連想配列、getenv 関数、または env メソッドで参照出来ます。 
+設定した環境変数は $_ENV 連想配列、getenv 関数、または env メソッドで参照出来ます。  
+例：`$env = self::env('APP_ENV');`
+
 ※ env メソッドは \Common\Core\Base を継承したクラスで使用することが出来ます。
 
 ## CLIでの利用方法
