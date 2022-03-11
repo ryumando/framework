@@ -22,18 +22,18 @@ class Database extends \Common\Core\Database
         #   ],
         #   'mysql' => [
         #       'driver' => 'mysql',
-        #       'user' => self::config('database.mysql.user'),
-        #       'password' => self::config('database.mysql.password'),
-        #       'dbname' => self::config('database.mysql.dbname'),
-        #       'host' => self::config('database.mysql.host'),
+        #       'user' => self::env('MYSQL_USER'),
+        #       'password' => self::env('MYSQL_PASSWORD'),
+        #       'dbname' => self::env('MYSQL_DBNAME'),
+        #       'host' => self::env('MYSQL_HOST'),
         #   ],
         #   'postgres' => [
         #       'driver' => 'postgres',
-        #       'user' => self::config('database.postgres.user'),
-        #       'password' => self::config('database.postgres.password'),
-        #       'dbname' => self::config('database.postgres.dbname'),
-        #       'host' => self::config('database.postgres.host'),
-        #   ],
+        #       'user' => self::env('POSTGRES_USER'),
+        #       'password' => self::env('POSTGRES_PASSWORD'),
+        #       'dbname' => self::env('POSTGRES_DBNAME'),
+        #       'host' => self::env('POSTGRES_HOST'),
+        #   ]
         ];
         parent::__construct($key);
     }

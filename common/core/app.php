@@ -16,11 +16,8 @@ class App
     /** @var string 親ディレクトリ絶対パス */
     public static $parent_path;
 
-    /** @var array 設定値 */
-    public static $config;
-
-    /** @var string 設定ファイルパス */
-    private static $config_file = 'config/app.ini';
+    /** @var string 環境設定ファイルパス */
+    private static $env_file = '.env';
 
     /** @var string ルーティングクラス */
     private static $routing_class = '\Middleware\Routing';
@@ -39,14 +36,14 @@ class App
     }
 
     /**
-     * 設定ファイル パス設定
+     * 環境変数ファイル パス設定
      *
      * @param string $path
      * @return object
      */
-    public function setConfigFile(string $path): object
+    public function setEnvFile(string $path): object
     {
-        self::$config_file = self::unifyPath(preg_replace('#^\.?/#', '', $path));
+        self::$env_file = self::unifyPath(preg_replace('#^\.?/#', '', $path));
         return $this;
     }
 
@@ -71,8 +68,8 @@ class App
      */
     public function start($cli = false, $argv = []): void
     {
-        // 設定値読込
-        self::$config = parse_ini_file(self::$project_path . '/' . self::$config_file, true);
+        // 環境変数設定
+        $this->setEnv();
 
         // オートローダー
         spl_autoload_register(function($class) {
@@ -173,6 +170,24 @@ class App
             if ($class !== $converted_class) return $this->dispatch($converted_class, $method, $args);
         }
         return false;
+    }
+
+    /**
+     * 環境変数設定
+     *
+     * @return void
+     */
+    private function setEnv(): void
+    {
+        if (is_file(self::$project_path . '/' . self::$env_file)) {
+            $file = str_replace('#', ';', file_get_contents(self::$project_path . '/' . self::$env_file));
+            $vars = parse_ini_string($file);
+            if (is_array($vars)) {
+                foreach ($vars as $k => $v) {
+                    if (!is_array($v)) putenv($k . '=' . $v);
+                }
+            }
+        }
     }
 
     /**

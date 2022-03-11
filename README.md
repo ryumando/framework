@@ -138,42 +138,23 @@ View ファイルの $res 変数は以下になります。
     $res['key1'] => 123
     $res['key2'] => 'ABC'
 
-## 設定値の参照
+## 環境変数の設定
 
-config/app.ini ファイルに任意の設定値を記載し、config メソッドを通して内容を参照することが出来ます。
+.env ファイルに ini ファイル形式で環境変数を設定することが出来ます。
 
 【設定例】
 
-    environment = develop
+    [App]
+    APP_ENV = development
 
-    pickup[] = 100
-    pickup[] = 200
-    pickup[] = 300
+    [MySQL]
+    MYSQL_USER = mysql_user
+    MYSQL_PASSWORD = mysql_password
+    MYSQL_DBNAME = mysql_db
+    MYSQL_HOST = mysql
 
-    [any-api]
-    url = "http://any-api-domain/sample/"
-
-    [databases]
-    default[driver] = SQLite
-    default[dbname] = "/sqlite/sqlite.db"
-
-config メソッドの引数には、参照したい設定値のキーをピリオドでつないで渡します。  
-例えば上記の設定例の場合、以下のようにキーを渡すことで値が返却されます。
-
-    self::config('environment') => 'develop'
-    self::config('pickup.0') => '100'
-    self::config('pickup.1') => '200'
-    self::config('pickup.2') => '300'
-    self::config('any-api.url') => 'http://any-api-domain/sample/'
-    self::config('databases.default.driver') => 'SQLite'
-    self::config('databases.default.dbname') => '/sqlite/sqlite.db'
-
-また、以下のように配列で参照することも可能です。
-
-    self::config('pickup') => ['100', '200', '300']
-
-
-※ config メソッドは \Common\Core\Base を継承したクラスで使用することが出来ます。
+設定した環境変数は $_ENV 連想配列、getenv 関数、または env メソッドで参照出来ます。 
+※ env メソッドは \Common\Core\Base を継承したクラスで使用することが出来ます。
 
 ## CLIでの利用方法
 
@@ -451,7 +432,7 @@ HTMLメールを送信する場合のみ true を設定します。
 - middleware/routing.php を変更する場合は、public/index.php および cli.php の \Common\Core\App::start メソッドを実行する前に、プロジェクトディレクトリから routing.php までの相対パス（またはRoutingクラス名）を引数として setRoutingClass メソッドを実行してください。  
 例： `$App->setRoutingClass('new/dir/routing.php')->start();`  
 
-- config/app.ini を変更する場合は、public/index.php および cli.php の \Common\Core\App::start メソッドを実行する前に、プロジェクトディレクトリから app.ini までの相対パスを引数として setConfigFile メソッドを実行してください。  
-例： `$App->setConfigFile('new/dir/app.ini')->start();`
+- .env ファイルを変更する場合は、public/index.php および cli.php の \Common\Core\App::start メソッドを実行する前に、プロジェクトディレクトリから .env ファイルまでの相対パスを引数として setEnvFile メソッドを実行してください。  
+例： `$App->setEnvFile('new/dir/new_env.ini')->start();`
 
 - docker ディレクトリを変更する場合は、docker-compose.yml 内の関連箇所も適宜書き換えてください。

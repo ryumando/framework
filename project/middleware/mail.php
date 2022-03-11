@@ -14,8 +14,8 @@ class Mail extends \Common\Core\Mail
     public function __construct()
     {
         parent::__construct();
-        # $this->to(self::config('mail.to'))
-        #     ->from(self::config('mail.from'))
-        #     ->subject(self::config('mail.subject'));
+        # $this->to(self::env('MAIL_TO'))
+        #     ->from(self::env('MAIL_FROM'))
+        #     ->subject(self::env('MAIL_SUBJECT'));
     }
 }
