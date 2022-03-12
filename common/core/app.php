@@ -180,8 +180,7 @@ class App
     private function setEnv(): void
     {
         if (is_file(self::$project_path . '/' . self::$env_file)) {
-            $file = str_replace('#', ';', file_get_contents(self::$project_path . '/' . self::$env_file));
-            $vars = parse_ini_string($file);
+            $vars = parse_ini_file(self::$project_path . '/' . self::$env_file);
             if (is_array($vars)) {
                 foreach ($vars as $k => $v) {
                     if (!is_array($v)) putenv($k . '=' . $v);

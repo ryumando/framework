@@ -110,7 +110,7 @@ http://localhost:1080
 
 ## Controller の利用
 
-Controller クラスには \Common\Core\Controller クラスを継承してください。  
+Controller クラスには \Common\Core\Controller クラスまたは \Controllers\Controller クラスを継承してください。  
 Controller クラスから view メソッドを実行すると View ファイルを呼び出すことが出来ます。  
 view メソッドの引数は以下です。（第1引数のみ必須）
 
